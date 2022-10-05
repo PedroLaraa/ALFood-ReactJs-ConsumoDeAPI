@@ -10,8 +10,11 @@ O Alfood é um site que lista restaurantes e pratos do menu.
 
 ## 🔨 Funcionalidades do projeto
 
-O Alfood começa com uma listagem estática de seu conteúdo e é esse o problema que queremos resolver.
-No decorrer do curso, vamos implementar toda a camada de comunicação com a API.
+O Alfood possui todas funcionalidade de um CRUD:
+- C - Create
+- R - Read
+- U - Update
+- D - Delete
 
 ## ✔️ Técnicas e tecnologias utilizadas
 
@@ -20,14 +23,29 @@ Se liga nessa lista de tudo que usaremos nesse treinamento:
 - `React`
 - `React Hooks`
 - `TypeScript`
-- `axios`
+- `Axios`
 
 ## 🛠️ Abrir e rodar o projeto
+Lado Client: 
 
-Para abrir e rodar o projeto, execute npm i para instalar as dependências e npm start para inicar o projeto.
+- Para abrir e rodar o projeto, execute npm i para instalar as dependências e npm start para inicar o projeto.
 
-Depois, acesse <a href="http://localhost:3000/">http://localhost:3000/</a> no seu navegador.
+- Depois, acesse <a href="http://localhost:3000/">http://localhost:3000/</a> no seu navegador.
 
-## 📚 Mais informações do curso
+API:
 
-Busque na plataforma da Alura o curso **Integrando seu projeto React com APIs** publicado na Escola Frontend.
+- Ter o Docker instalado em sua máquina.
+
+-Abrir o terminal Docker
+
+- Executar " cd caminho/da/api/no/seu/pc "
+
+- Rodar no terminal " docker-compose build "
+
+- Rodar no terminal " docker-compose up "
+
+- API estará disponível na porta :8000 por padrão
+
+#
+
+## 🐱‍👤👨‍💻 É ISSO, ESPERO QUE CURTA O PROJETO E FIQUE A VONTADE PARA SE DIVERTIR!!!
