@@ -2,9 +2,7 @@ import React from 'react';
 
 import { useState, useEffect } from 'react';
 
-import { TextField, Button, Box, Typography } from "@mui/material";
-
-import axios from "axios";
+import { TextField, Button, Box, Typography, AppBar, Container, Toolbar, Link, Paper } from "@mui/material";
 
 import { useParams } from 'react-router-dom';
 
@@ -59,9 +57,10 @@ const FormularioRestaurante = () => {
     }, [parametros])
 
     return (
-        <Box sx={{display: 'flex', flexDirection: "column", alignItems: "center"}}>
-            <Typography component='h1' variant='h6'>Formulário de restaurante: </Typography>
-                <Box component="form" onSubmit={aoSubmeterForm}>
+        <>
+            <Box sx={{ display: 'flex', flexDirection: "column", alignItems: "center", flexGrow: 1 }}>
+                <Typography component='h1' variant='h6'>Formulário de Restaurante: </Typography>
+                <Box component="form" sx={{ width: '100%' }} onSubmit={aoSubmeterForm}>
                     <TextField
                         value={nomeRestaurante}
                         onChange={evento => setNomeRestaurante(evento.target.value)}
@@ -74,12 +73,13 @@ const FormularioRestaurante = () => {
                         type="submit"
                         variant="outlined"
                         fullWidth
-                        sx={{marginTop: "1rem"}}
+                        sx={{ marginTop: "1rem" }}
                     >
                         Salvar
                     </Button>
                 </Box>
-        </Box>
+            </Box>
+        </>
     );
 };
 
