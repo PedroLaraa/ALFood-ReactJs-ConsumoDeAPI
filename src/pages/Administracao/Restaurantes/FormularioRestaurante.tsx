@@ -1,42 +1,85 @@
-import React from 'react'
+import React from 'react';
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
 
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Box, Typography } from "@mui/material";
 
-import axios from "axios"
+import axios from "axios";
+
+import { useParams } from 'react-router-dom';
+
+import IRestaurante from '../../../interfaces/IRestaurante';
+
+import http from '../../../config';
 
 const FormularioRestaurante = () => {
 
-    const [nomeRestaurante, setNomeRestaurante] = useState('')
+    const parametros = useParams();
+
+    const [nomeRestaurante, setNomeRestaurante] = useState('');
 
     const aoSubmeterForm = (evento: React.FormEvent<HTMLFormElement>) => {
+
         evento.preventDefault();
 
-        axios.post("http://localhost:8000/api/v2/restaurantes/")
-            .then((res) => {
-                alert("Restaurante cadastrado com sucesso!")
+        if (parametros.id) {
+            http.put(`restaurantes/${parametros.id}/`, {
+                nome: nomeRestaurante
+            }).then((res) => {
+                alert("Restaurante editado com sucesso!");
+
             }).catch((err) => {
-                alert("Erro ao cadastrar restaurante!")
-                console.log(err)
+                alert('Erro ao editar restaurante!');
+                console.log(err);
             })
+        } else {
+            http.post("restaurantes/", {
+                nome: nomeRestaurante
+            })
+                .then((res) => {
+                    alert("Restaurante cadastrado com sucesso!");
+
+                }).catch((err) => {
+                    alert("Erro ao cadastrar restaurante!");
+                    console.log(err);
+                });
+        };
     };
 
+    useEffect(() => {
+        if (parametros.id) {
+            http.get<IRestaurante>(`restaurantes/${parametros.id}/`)
+                .then((res) => {
+                    setNomeRestaurante(res.data.nome);
+
+                }).catch((err) => {
+                    console.log(err);
+                })
+        }
+    }, [parametros])
+
     return (
-        <form onSubmit={aoSubmeterForm}>
-            <TextField
-                value={nomeRestaurante}
-                onChange={evento => setNomeRestaurante(evento.target.value)}
-                id="standard-basic"
-                label="Nome do restaurante:"
-                variant="standard" />
-            <Button
-                type="submit"
-                variant="outlined"
-            >
-                Salvar
-            </Button>
-        </form>
+        <Box sx={{display: 'flex', flexDirection: "column", alignItems: "center"}}>
+            <Typography component='h1' variant='h6'>Formulário de restaurante: </Typography>
+                <Box component="form" onSubmit={aoSubmeterForm}>
+                    <TextField
+                        value={nomeRestaurante}
+                        onChange={evento => setNomeRestaurante(evento.target.value)}
+                        id="standard-basic"
+                        label="Nome do restaurante:"
+                        fullWidth
+                        required
+                        variant="standard" />
+                    <Button
+                        type="submit"
+                        variant="outlined"
+                        fullWidth
+                        sx={{marginTop: "1rem"}}
+                    >
+                        Salvar
+                    </Button>
+                </Box>
+        </Box>
     );
 };
 
